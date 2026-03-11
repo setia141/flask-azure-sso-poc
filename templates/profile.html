@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Profile - Flask Azure SSO{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>👤 User Profile</h2>
+    
+    <div class="user-info">
+        <h3>Account Information</h3>
+        <p><strong>Display Name:</strong> {{ user.name }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>User ID:</strong> {{ user.id }}</p>
+    </div>
+    
+    <div style="margin-top: 2rem;">
+        <h3>Authorization Status</h3>
+        {% if authorized %}
+            <div style="padding: 1rem; background: #d4edda; border-radius: 5px; border: 1px solid #c3e6cb; margin-top: 1rem;">
+                <p style="color: #155724; margin: 0;">
+                    ✅ <strong>Authorized</strong> - You are a member of the authorized group and have access to protected resources.
+                </p>
+            </div>
+            <div style="margin-top: 1rem;">
+                <a href="{{ url_for('dashboard') }}" class="btn">Access Dashboard</a>
+            </div>
+        {% else %}
+            <div style="padding: 1rem; background: #f8d7da; border-radius: 5px; border: 1px solid #f5c6cb; margin-top: 1rem;">
+                <p style="color: #721c24; margin: 0;">
+                    ❌ <strong>Not Authorized</strong> - You do not have access to protected resources.
+                </p>
+                <p style="color: #721c24; margin-top: 0.5rem; font-size: 0.9rem;">
+                    Please contact your administrator to be added to the authorized Azure AD group.
+                </p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<div class="card">
+    <h3>🔐 Session Information</h3>
+    <ul style="margin: 1rem 0 1rem 2rem; color: #666;">
+        <li>You are logged in with your Microsoft account</li>
+        <li>Your session is secured with Azure AD tokens</li>
+        <li>Session will expire after 1 hour of inactivity</li>
+    </ul>
+    <div style="margin-top: 1.5rem;">
+        <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Flask Azure SSO{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>📊 Protected Dashboard</h2>
+    <p style="margin: 1rem 0; color: #28a745;">
+        ✅ You are authorized to view this page because you are a member of the authorized Azure AD group.
+    </p>
+    
+    <div class="user-info">
+        <h3>User Information</h3>
+        <p><strong>Name:</strong> {{ user.name }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>User ID:</strong> {{ user.id }}</p>
+        <span class="badge">Authorized User</span>
+    </div>
+</div>
+
+<div class="card">
+    <h3>🎯 What you can do here</h3>
+    <p style="color: #666; margin: 1rem 0;">
+        This is a protected area that only authorized users can access. You can:
+    </p>
+    <ul style="margin: 1rem 0 1rem 2rem; color: #666;">
+        <li>View sensitive organizational data</li>
+        <li>Access protected resources</li>
+        <li>Manage applications and services</li>
+        <li>Perform administrative tasks</li>
+    </ul>
+</div>
+
+<div class="card">
+    <h3>🔒 Security Features</h3>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;">
+        <div style="padding: 1rem; background: #d4edda; border-radius: 5px; border: 1px solid #c3e6cb;">
+            <h4 style="color: #155724;">✓ Authenticated</h4>
+            <p style="color: #155724; margin-top: 0.5rem;">Verified via Azure AD</p>
+        </div>
+        <div style="padding: 1rem; background: #d4edda; border-radius: 5px; border: 1px solid #c3e6cb;">
+            <h4 style="color: #155724;">✓ Authorized</h4>
+            <p style="color: #155724; margin-top: 0.5rem;">Member of approved group</p>
+        </div>
+        <div style="padding: 1rem; background: #d4edda; border-radius: 5px; border: 1px solid #c3e6cb;">
+            <h4 style="color: #155724;">✓ Session Active</h4>
+            <p style="color: #155724; margin-top: 0.5rem;">Secure token in place</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

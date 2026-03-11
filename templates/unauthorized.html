@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Unauthorized - Flask Azure SSO{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2 style="color: #dc3545;">🚫 Access Denied</h2>
+    
+    <div style="padding: 1.5rem; background: #f8d7da; border-radius: 5px; border: 1px solid #f5c6cb; margin: 1.5rem 0;">
+        <h3 style="color: #721c24; margin-bottom: 1rem;">You do not have permission to access this resource</h3>
+        <p style="color: #721c24; margin: 0.5rem 0;">
+            While you have successfully authenticated with your Microsoft account, you are not a member of the authorized Azure AD group required to access protected resources in this application.
+        </p>
+    </div>
+    
+    <div class="user-info">
+        <h3>Your Account</h3>
+        <p><strong>Name:</strong> {{ user.name }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <span class="badge badge-danger">Not Authorized</span>
+    </div>
+    
+    <div style="margin-top: 2rem;">
+        <h3>What can you do?</h3>
+        <ul style="margin: 1rem 0 1rem 2rem; color: #666;">
+            <li>Contact your IT administrator or application owner</li>
+            <li>Request to be added to the authorized Azure AD group</li>
+            <li>Verify you are using the correct Microsoft account</li>
+        </ul>
+    </div>
+    
+    <div style="margin-top: 2rem;">
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">Back to Home</a>
+        <a href="{{ url_for('logout') }}" class="btn btn-danger" style="margin-left: 1rem;">Logout</a>
+    </div>
+</div>
+
+<div class="card">
+    <h3>ℹ️ About Authorization</h3>
+    <p style="color: #666; margin: 1rem 0;">
+        This application uses Azure Active Directory group-based authorization to control access to protected resources. 
+        Only users who are members of specific Azure AD groups can access certain features of the application.
+    </p>
+    <p style="color: #666; margin: 1rem 0;">
+        This provides an additional layer of security beyond just authentication, ensuring that only authorized 
+        users within your organization can access sensitive data and functionality.
+    </p>
+</div>
+{% endblock %}

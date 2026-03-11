@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Flask Azure SSO{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>Welcome to Flask Azure SSO Demo</h2>
+    <p style="margin: 1rem 0; color: #666;">
+        This application demonstrates organization-level Single Sign-On using Azure Active Directory.
+    </p>
+    
+    {% if user %}
+        <div class="user-info">
+            <h3>👤 Logged in as: {{ user.name }}</h3>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            {% if session.authorized %}
+                <span class="badge">Authorized</span>
+            {% else %}
+                <span class="badge badge-danger">Not Authorized</span>
+            {% endif %}
+        </div>
+        
+        {% if session.authorized %}
+            <p style="margin: 1rem 0;">
+                ✅ You have access to protected resources.
+            </p>
+            <a href="{{ url_for('dashboard') }}" class="btn">Go to Dashboard</a>
+        {% else %}
+            <p style="margin: 1rem 0; color: #dc3545;">
+                ❌ You are logged in but not authorized to access protected resources.
+                Please contact your administrator to be added to the authorized group.
+            </p>
+        {% endif %}
+    {% else %}
+        <div style="margin: 2rem 0;">
+            <h3>🔐 Secure Access</h3>
+            <ul style="margin: 1rem 0 1rem 2rem; color: #666;">
+                <li>Organization-level authentication</li>
+                <li>Group-based authorization</li>
+                <li>Secure token management</li>
+                <li>Microsoft Graph API integration</li>
+            </ul>
+        </div>
+        
+        <a href="{{ url_for('login') }}" class="btn">Login with Microsoft</a>
+    {% endif %}
+</div>
+
+<div class="card">
+    <h3>📋 Features</h3>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;">
+        <div style="padding: 1rem; background: #f8f9fa; border-radius: 5px;">
+            <h4>🔒 Azure AD SSO</h4>
+            <p style="color: #666; margin-top: 0.5rem;">Seamless authentication with your organization's Azure AD</p>
+        </div>
+        <div style="padding: 1rem; background: #f8f9fa; border-radius: 5px;">
+            <h4>👥 Group Authorization</h4>
+            <p style="color: #666; margin-top: 0.5rem;">Access control based on Azure AD group membership</p>
+        </div>
+        <div style="padding: 1rem; background: #f8f9fa; border-radius: 5px;">
+            <h4>🛡️ Secure Sessions</h4>
+            <p style="color: #666; margin-top: 0.5rem;">Protected sessions with automatic token refresh</p>
+        </div>
+        <div style="padding: 1rem; background: #f8f9fa; border-radius: 5px;">
+            <h4>📊 Graph API</h4>
+            <p style="color: #666; margin-top: 0.5rem;">Integration with Microsoft Graph for user data</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
